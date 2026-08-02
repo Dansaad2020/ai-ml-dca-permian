@@ -1,0 +1,3 @@
+model,window,start_month,end_month,observations,mae_bbl,rmse_bbl,bias_bbl,smape_percent
+hyperbolic_decline,train,2,24,23,585.8738894794916,747.9921434878086,-33.38166057093258,7.088467586491301
+hyperbolic_decline,test,25,33,9,526.4136217761583,622.2155495989498,-512.767865442359,14.010740232200833
