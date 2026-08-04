@@ -1,0 +1,4 @@
+model,wells,historical_cumulative_oil_bbl,forecast_cumulative_oil_bbl,eur_style_oil_bbl,median_well_eur_style_oil_bbl,wells_reaching_low_rate_threshold,median_first_month_below_threshold
+exponential,27,7568512.0,1574354.4213199888,9142866.42131999,322121.53337724716,14,82.0
+harmonic,30,8390792.0,5489583.039150669,13880375.039150668,457448.9188922312,0,
+hyperbolic,30,8390792.0,3363246.464431678,11754038.464431679,349594.45083882683,8,88.5
