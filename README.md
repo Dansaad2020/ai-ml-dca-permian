@@ -23,6 +23,9 @@ Reservoir forecasting and AI safety evaluation share a practical habit: models s
 Current baselines:
 
 - Last observed oil rate
+- Trailing 3-month oil average
+- Trailing 6-month oil average
+- Linear regression
 - Random forest regression
 - Gradient boosting regression
 
@@ -33,6 +36,12 @@ Classical DCA baselines:
 - Per-well exponential decline
 - Per-well hyperbolic decline
 - Per-well harmonic decline, in notebook workflow
+
+Technical recovery / duration-style scenarios:
+
+- DCA modeled oil through month 120
+- Recursive ML modeled oil through month 120
+- 30-well DCA vs ML technical recoverable oil comparison table
 
 Evaluation:
 
@@ -47,6 +56,8 @@ Evaluation:
 This is an availability-constrained convenience cohort, not a representative population study or reserves report. The prior QA review found that completion archive coverage was incomplete and that the cohort should not be described as representative of all Pioneer or Martin County wells.
 
 The project is oil-focused. Gas forecasting is excluded from the first release because the prior gas decline fit reached a search-grid boundary and was suppressed from external use.
+
+Technical recovery outputs in this repository are not SPE PRMS reserves estimates. No economic limit, abandonment cutoff, commerciality screen, ownership adjustment, or reserves-category assessment has been applied.
 
 ## Quick Start
 
@@ -82,6 +93,14 @@ Current notebook/script artifacts:
 03_hyperbolic_decline_dca.py
 04_harmonic_decline_dca.ipynb
 05_dca_model_comparison.ipynb
+06_simple_ml_forecast_baselines.ipynb
+06_simple_ml_forecast_baselines_manual.ipynb
+07_fixed_origin_ml_vs_dca.ipynb
+08_export_dca_comparison_ready.ipynb
+09_ml_dca_forecast_diagnostic_plots.ipynb
+10_dca_eur_duration_forecast.ipynb
+11_ml_duration_forecast_scenarios.ipynb
+12_dca_ml_technical_recovery_comparison.ipynb
 ```
 
 Supporting DCA notes are saved under:
@@ -96,7 +115,22 @@ Generated DCA outputs currently available on disk are saved under:
 reports/dca_outputs/
 ```
 
-The exponential and hyperbolic notebooks are the cleaned final versions after interactive error fixing. The harmonic and all-model DCA comparison notebooks are also saved in the same workflow folder.
+Generated ML and DCA-vs-ML comparison outputs are saved under:
+
+```text
+reports/ml_outputs/
+```
+
+The workflow now includes short-horizon validation notebooks, DCA comparison-ready exports, diagnostic plots, DCA technical recovery forecasts, recursive ML technical recovery scenarios, and a combined 30-well DCA-vs-ML technical recovery comparison.
+
+Key comparison artifacts:
+
+```text
+reports/dca_outputs/dca_30_well_technical_recoverable_oil_table.csv
+reports/ml_outputs/ml_30_well_technical_recoverable_oil_table.csv
+reports/ml_outputs/dca_ml_30_well_technical_recovery_comparison.csv
+reports/ml_outputs/dca_ml_technical_recovery_scenario_totals.csv
+```
 
 ## Project Structure
 
@@ -105,13 +139,14 @@ data/processed/       Reused processed cohort data from the SEM project
 reports/              Metrics, figures, limitations, and source QA notes
 reports/dca_notes/    DCA project notes and data understanding
 reports/dca_outputs/  Saved DCA CSV and PNG outputs
+reports/ml_outputs/   Saved ML metrics, diagnostics, and DCA-vs-ML comparison outputs
 src/dca_ml/           Python modules for loading, features, DCA, ML, and evaluation
 run_baseline.py       First runnable model-comparison workflow
 ```
 
 ## Next Steps
 
-1. Add the harmonic and all-model DCA comparison outputs to `reports/dca_outputs/`.
-2. Build simple ML forecast baselines using the same months 12-24 fit window and months 25-33 evaluation window.
-3. Compare ML against the completed DCA benchmark set.
-4. Write a short final summary explaining when ML helps, when it does not, and how uncertainty should be communicated.
+1. Review notebooks 10-12 in Jupyter and confirm the markdown narrative matches the final figures/tables.
+2. Write a short final summary explaining where DCA and ML differ for short-horizon scoring versus technical recovery scenarios.
+3. Keep the reserves caveat prominent: the technical recovery tables are modeled oil outputs, not SPE PRMS reserves.
+4. Optionally add a lightweight release note or final report section around `reports/ml_outputs/dca_ml_30_well_technical_recovery_comparison.csv`.
